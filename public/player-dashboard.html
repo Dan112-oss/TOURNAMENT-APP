@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <span class="dashboard-brand">Bracketed</span>
+    <div class="dashboard-user">
+      <span class="dashboard-username" id="username-display"></span>
+      <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Your tournaments</h1>
+        <p class="dashboard-subtitle">Track every tournament you've joined and jump into the live table.</p>
+      </div>
+      <button type="button" class="btn btn-primary" id="open-join-modal">Join tournament</button>
+    </div>
+
+    <!-- Empty state -->
+    <div class="card empty-state" id="empty-state" hidden>
+      <h2 class="empty-state-title">You haven't joined a tournament yet</h2>
+      <p class="empty-state-desc">
+        Ask your host for their join code, then enter it here to get on the bracket.
+      </p>
+      <button type="button" class="btn btn-primary" id="empty-state-join-btn">Join tournament</button>
+    </div>
+
+    <!-- Tournament grid -->
+    <div class="tournament-grid" id="tournament-grid" hidden></div>
+  </main>
+
+  <!-- Join Tournament modal -->
+  <div class="modal-overlay" id="join-modal-overlay" hidden>
+    <div class="card modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Join tournament</h2>
+        <button type="button" class="modal-close" id="close-join-modal" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="join-tournament-form" novalidate>
+        <div id="join-alert" class="alert alert-danger" hidden></div>
+
+        <div class="field">
+          <label for="join-code-input">Join code</label>
+          <input id="join-code-input" name="join_code" type="text" maxlength="10" autocomplete="off" required placeholder="e.g. AB12CD" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Join tournament</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/player-dashboard.js"></script>
+</body>
+</html>
