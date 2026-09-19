@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tournament</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/tournament-view.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <a class="dashboard-brand" href="tournaments.html" style="text-decoration:none;">Bracketed</a>
+    <div class="dashboard-user" id="topbar-auth-area"></div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="view-header">
+      <h1 class="view-title" id="tournament-name">Loading…</h1>
+      <div class="view-meta">
+        <span class="status-badge" id="tournament-status-badge"></span>
+        <span id="tournament-format-label"></span>
+        <span id="tournament-game-label"></span>
+        <span id="tournament-host-label"></span>
+      </div>
+    </div>
+
+    <!-- Join widget -->
+    <div class="card join-box" id="join-box" hidden>
+      <div class="field">
+        <label for="join-code-input">Have a join code?</label>
+        <input id="join-code-input" type="text" maxlength="10" autocomplete="off" placeholder="e.g. AB12CD" />
+      </div>
+      <button type="button" class="btn btn-primary" id="join-btn">Join tournament</button>
+      <p class="field-error" id="join-error" hidden></p>
+    </div>
+
+    <!-- Round-robin: standings -->
+    <section id="standings-section" hidden>
+      <h2 class="manage-section-title" style="margin-bottom: var(--space-4);">Standings</h2>
+      <div class="card" style="padding: 0; margin-bottom: var(--space-7);">
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th class="numeric">P</th>
+              <th class="numeric">W</th>
+              <th class="numeric">D</th>
+              <th class="numeric">L</th>
+              <th class="numeric">GF</th>
+              <th class="numeric">GA</th>
+              <th class="numeric">GD</th>
+              <th class="numeric">Pts</th>
+            </tr>
+          </thead>
+          <tbody id="standings-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Round-robin: match list -->
+    <section id="rr-matches-section" hidden>
+      <h2 class="manage-section-title" style="margin-bottom: var(--space-4);">Fixtures</h2>
+      <div id="rr-rounds-list"></div>
+    </section>
+
+    <!-- Knockout: bracket tree -->
+    <section id="bracket-section" hidden>
+      <h2 class="manage-section-title" style="margin-bottom: var(--space-4);">Bracket</h2>
+      <div class="bracket-wrap">
+        <div class="bracket" id="bracket"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/tournament-view.js"></script>
+</body>
+</html>

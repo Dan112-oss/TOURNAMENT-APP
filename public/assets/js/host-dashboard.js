@@ -79,8 +79,10 @@ async function requireHost() {
 // Tournament list rendering
 // ------------------------------------------------------------
 function renderTournamentCard(t) {
-  const card = document.createElement('div');
+  const card = document.createElement('a');
   card.className = 'card tournament-card';
+  card.href = `tournament-manage.html?id=${t.id}`;
+  card.style.display = 'flex';
 
   const statusLabel = STATUS_LABELS[t.status] || t.status;
   const cap = t.max_participants ? `/ ${t.max_participants}` : '';
@@ -139,7 +141,9 @@ async function loadTournaments() {
 
   // Wire up copy buttons for this render pass.
   grid.querySelectorAll('.copy-btn').forEach((btn) => {
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
       try {
         await navigator.clipboard.writeText(btn.dataset.code);
         const original = btn.textContent;

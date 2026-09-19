@@ -13,6 +13,31 @@ const ROLE_REDIRECTS = {
   both: 'dashboard-select.html',
 };
 
+/**
+ * If the person arrived here from a tournament page's join box while
+ * logged out (?join_code=...&return=...), join that tournament right
+ * after auth succeeds, then send them back instead of the default
+ * dashboard. Falls back to the normal role-based redirect otherwise.
+ */
+async function handlePostAuthRedirect(role) {
+  const params = new URLSearchParams(window.location.search);
+  const joinCode = params.get('join_code');
+  const returnUrl = params.get('return');
+
+  if (joinCode) {
+    try {
+      await postJSON('/api/tournaments/join.php', { join_code: joinCode });
+    } catch (err) {
+      // Join failed (already joined, tournament closed, etc.) — still
+      // send them back to the tournament page, which will show why.
+    }
+    window.location.href = returnUrl || (ROLE_REDIRECTS[role] || 'player-dashboard.html');
+    return;
+  }
+
+  window.location.href = ROLE_REDIRECTS[role] || 'player-dashboard.html';
+}
+
 function initTabs() {
   const tabButtons = document.querySelectorAll('.tab-btn');
   const forms = {
@@ -101,8 +126,7 @@ function initLoginForm() {
         return;
       }
 
-      const redirectTo = ROLE_REDIRECTS[data.user.role] || 'player-dashboard.html';
-      window.location.href = redirectTo;
+      await handlePostAuthRedirect(data.user.role);
     } catch (err) {
       setAlert(alertEl, 'Could not reach the server. Check your connection and try again.');
     } finally {
@@ -156,8 +180,7 @@ function initRegisterForm() {
         return;
       }
 
-      const redirectTo = ROLE_REDIRECTS[data.user.role] || 'player-dashboard.html';
-      window.location.href = redirectTo;
+      await handlePostAuthRedirect(data.user.role);
     } catch (err) {
       setAlert(alertEl, 'Could not reach the server. Check your connection and try again.');
     } finally {

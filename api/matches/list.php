@@ -49,7 +49,11 @@ try {
             m.resolution_type, m.winner_id,
             p1.id AS player1_participant_id, u1.username AS player1_username,
             p2.id AS player2_participant_id, u2.username AS player2_username,
-            latest.score_player1, latest.score_player2
+            latest.score_player1, latest.score_player2,
+            active_result.score_player1 AS pending_score_player1,
+            active_result.score_player2 AS pending_score_player2,
+            active_result.status AS pending_result_status,
+            u3.username AS pending_submitted_by_username
          FROM matches m
          LEFT JOIN participants p1 ON p1.id = m.player1_id
          LEFT JOIN users u1 ON u1.id = p1.user_id
@@ -65,6 +69,17 @@ try {
                 GROUP BY match_id
             ) latest_ids ON latest_ids.match_id = mr.match_id AND latest_ids.max_id = mr.id
          ) latest ON latest.match_id = m.id
+         LEFT JOIN (
+            SELECT mr.match_id, mr.score_player1, mr.score_player2, mr.submitted_by, mr.status
+            FROM match_results mr
+            INNER JOIN (
+                SELECT match_id, MAX(id) AS max_id
+                FROM match_results
+                WHERE status IN ('pending_confirmation', 'disputed')
+                GROUP BY match_id
+            ) active_ids ON active_ids.match_id = mr.match_id AND active_ids.max_id = mr.id
+         ) active_result ON active_result.match_id = m.id
+         LEFT JOIN users u3 ON u3.id = active_result.submitted_by
          WHERE m.tournament_id = :tournament_id";
 
     $params = [':tournament_id' => $tournamentId];
@@ -102,6 +117,16 @@ try {
             'score_player1' => $row['score_player1'] !== null ? (int) $row['score_player1'] : null,
             'score_player2' => $row['score_player2'] !== null ? (int) $row['score_player2'] : null,
             'winner_id' => $row['winner_id'] !== null ? (int) $row['winner_id'] : null,
+            // The still-unresolved submission, if any — populated while
+            // status is 'awaiting_confirmation' or 'disputed'. This is
+            // NOT an approved score; it's what a player submitted that
+            // hasn't been confirmed (or was disputed) yet.
+            'pending_submission' => $row['pending_result_status'] !== null ? [
+                'score_player1' => (int) $row['pending_score_player1'],
+                'score_player2' => (int) $row['pending_score_player2'],
+                'status' => $row['pending_result_status'],
+                'submitted_by_username' => $row['pending_submitted_by_username'],
+            ] : null,
         ];
     }
 

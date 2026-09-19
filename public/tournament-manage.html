@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage tournament</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/manage.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <a class="dashboard-brand" href="host-dashboard.html" style="text-decoration:none;">Bracketed</a>
+    <div class="dashboard-user">
+      <span class="dashboard-username" id="username-display"></span>
+      <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <a href="host-dashboard.html" style="display:inline-block; margin-bottom: var(--space-4); color: var(--color-text-muted); font-size: 14px;">&larr; Back to dashboard</a>
+
+    <!-- Overview -->
+    <div class="manage-header">
+      <div>
+        <h1 class="manage-title" id="tournament-name">Loading…</h1>
+        <div class="manage-meta">
+          <span class="status-badge" id="tournament-status-badge"></span>
+          <span id="tournament-format-label"></span>
+          <span id="tournament-game-label"></span>
+        </div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" id="generate-fixtures-btn" hidden>Generate fixtures now</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: var(--space-7);">
+      <div class="tournament-card-code" style="margin-bottom: var(--space-3);">
+        Join code: <code id="join-code-display">——</code>
+        <button type="button" class="copy-btn" id="copy-join-code">Copy</button>
+      </div>
+      <p class="dashboard-subtitle" id="tournament-description"></p>
+    </div>
+
+    <!-- Disputes -->
+    <section class="manage-section disputes-section">
+      <h2 class="manage-section-title">Disputed matches</h2>
+      <div id="disputes-list"></div>
+    </section>
+
+    <!-- Matches -->
+    <section class="manage-section">
+      <h2 class="manage-section-title">Matches</h2>
+      <div id="rounds-list"></div>
+    </section>
+
+    <!-- Participants -->
+    <section class="manage-section">
+      <h2 class="manage-section-title">Participants</h2>
+      <div class="card" style="padding: 0;">
+        <table class="participants-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Status</th>
+              <th>Missed matches</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="participants-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reusable match-row + resolve-controls template -->
+  <template id="match-row-template">
+    <div class="card match-row">
+      <div class="match-row-top">
+        <div class="match-players">
+          <span class="player1-name"></span>
+          <span class="vs">vs</span>
+          <span class="player2-name"></span>
+        </div>
+        <div>
+          <span class="match-score"></span>
+          <span class="status-badge match-status-badge"></span>
+        </div>
+      </div>
+      <p class="match-pending-note" hidden></p>
+      <div class="match-resolve" hidden>
+        <div class="score-inputs">
+          <input type="number" min="0" class="score1-input" aria-label="Player 1 score" />
+          <span>–</span>
+          <input type="number" min="0" class="score2-input" aria-label="Player 2 score" />
+          <button type="button" class="btn btn-primary btn-sm submit-score-btn">Submit score</button>
+        </div>
+        <button type="button" class="btn btn-ghost btn-sm walkover1-btn"></button>
+        <button type="button" class="btn btn-ghost btn-sm walkover2-btn"></button>
+        <button type="button" class="btn btn-danger btn-sm void-btn">Void match</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="assets/js/tournament-manage.js"></script>
+</body>
+</html>
