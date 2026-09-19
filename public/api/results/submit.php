@@ -15,11 +15,11 @@ declare(strict_types=1);
 header('Content-Type: application/json');
 session_start();
 
-require_once __DIR__ . '/../../core/Database.php';
+require_once __DIR__ . '/../../../core/Database.php';
 
 const MAX_PROOF_BYTES = 5 * 1024 * 1024; // 5MB
 const ALLOWED_MIME_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-const UPLOAD_DIR = __DIR__ . '/../../public/uploads/proofs/';
+const UPLOAD_DIR = __DIR__ . '/../../uploads/proofs/';
 
 function respond(int $statusCode, array $payload): void
 {

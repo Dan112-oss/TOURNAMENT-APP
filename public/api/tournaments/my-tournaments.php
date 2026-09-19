@@ -12,7 +12,7 @@ declare(strict_types=1);
 header('Content-Type: application/json');
 session_start();
 
-require_once __DIR__ . '/../../core/Database.php';
+require_once __DIR__ . '/../../../core/Database.php';
 
 const HOST_TOURNAMENT_STATUSES = ['draft', 'open_for_registration', 'in_progress', 'completed', 'cancelled'];
 

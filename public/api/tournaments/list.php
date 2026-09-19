@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../core/Database.php';
+require_once __DIR__ . '/../../../core/Database.php';
 
 const DEFAULT_LIMIT = 20;
 const MAX_LIMIT = 50;

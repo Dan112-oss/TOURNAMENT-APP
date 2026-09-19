@@ -16,7 +16,7 @@ declare(strict_types=1);
 header('Content-Type: application/json');
 session_start();
 
-require_once __DIR__ . '/../../core/Database.php';
+require_once __DIR__ . '/../../../core/Database.php';
 
 const PARTICIPANT_STATUSES = ['active', 'disqualified', 'withdrawn'];
 
