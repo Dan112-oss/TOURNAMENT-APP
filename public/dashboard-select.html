@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose a dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+    .select-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-6);
+    }
+
+    .select-wrap {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .select-title {
+      font-size: 32px;
+      margin-bottom: var(--space-2);
+    }
+
+    .select-sub {
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-6);
+    }
+
+    .select-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    .select-card {
+      display: block;
+      padding: var(--space-6) var(--space-4);
+      text-decoration: none;
+      color: var(--color-text);
+      transition: border-color 160ms ease;
+    }
+
+    .select-card:hover {
+      border-color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .select-card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      margin-bottom: var(--space-2);
+    }
+
+    .select-card-desc {
+      color: var(--color-text-muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 560px) {
+      .select-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="select-page">
+    <div class="select-wrap">
+      <h1 class="select-title">Where are you headed?</h1>
+      <p class="select-sub">Your account is set up for both hosting and playing — pick one to continue.</p>
+
+      <div class="select-options">
+        <a class="card select-card" href="host-dashboard.html">
+          <div class="select-card-title">Host</div>
+          <div class="select-card-desc">Create and manage tournaments</div>
+        </a>
+        <a class="card select-card" href="player-dashboard.html">
+          <div class="select-card-title">Player</div>
+          <div class="select-card-desc">Browse and join tournaments</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

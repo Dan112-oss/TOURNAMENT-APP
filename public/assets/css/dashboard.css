@@ -1,0 +1,280 @@
+/* ============================================================
+   Dashboard layout — shared by host-dashboard and (later)
+   player-dashboard. Builds on main.css tokens/components.
+   ============================================================ */
+
+.dashboard-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-brand {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.dashboard-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.dashboard-username {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-strong);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-text-muted);
+}
+
+.dashboard-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-6);
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.dashboard-title {
+  font-size: 32px;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-subtitle {
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------------
+   Empty state
+   ------------------------------------------------------------ */
+.empty-state {
+  text-align: center;
+  padding: var(--space-8) var(--space-5);
+}
+
+.empty-state-title {
+  font-size: 22px;
+  margin-bottom: var(--space-2);
+}
+
+.empty-state-desc {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+  max-width: 44ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ------------------------------------------------------------
+   Tournament grid + card
+   ------------------------------------------------------------ */
+.tournament-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.tournament-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.tournament-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.tournament-card-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.tournament-card-meta {
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+.tournament-card-stats {
+  display: flex;
+  gap: var(--space-4);
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.tournament-card-code {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-bg-elevated-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.tournament-card-code code {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text);
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-draft {
+  background: rgba(137, 150, 172, 0.15);
+  color: var(--color-text-muted);
+}
+
+.status-open_for_registration {
+  background: rgba(255, 176, 32, 0.15);
+  color: var(--color-accent);
+}
+
+.status-in_progress {
+  background: rgba(22, 58, 46, 0.5);
+  color: #6fcf97;
+}
+
+.status-completed {
+  background: rgba(245, 247, 250, 0.1);
+  color: var(--color-text-muted);
+}
+
+.status-cancelled {
+  background: rgba(255, 70, 85, 0.12);
+  color: var(--color-danger);
+}
+
+/* ------------------------------------------------------------
+   Modal
+   ------------------------------------------------------------ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 15, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  z-index: 50;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.modal-title {
+  font-size: 22px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-1);
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.field select {
+  background: var(--color-bg-elevated-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 11px 14px;
+}
+
+.field textarea {
+  background: var(--color-bg-elevated-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 11px 14px;
+  resize: vertical;
+  min-height: 72px;
+}
+
+@media (max-width: 560px) {
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-topbar {
+    padding: var(--space-4);
+  }
+
+  .dashboard-main {
+    padding: var(--space-6) var(--space-4);
+  }
+}

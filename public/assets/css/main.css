@@ -1,0 +1,209 @@
+/* ============================================================
+   Tournament App — Design System
+   Dark esports theme, grounded in a "matchday at night" concept:
+   navy pitch background, floodlight amber accent, scoreboard red
+   reserved strictly for errors/live states.
+   ============================================================ */
+
+:root {
+  /* Color */
+  --color-bg: #0b1220;
+  --color-bg-elevated: #121b2e;
+  --color-bg-elevated-2: #182338;
+  --color-turf: #163a2e;
+  --color-accent: #ffb020;
+  --color-accent-hover: #ffc250;
+  --color-danger: #ff4655;
+  --color-text: #f5f7fa;
+  --color-text-muted: #8996ac;
+  --color-border: rgba(245, 247, 250, 0.08);
+  --color-border-strong: rgba(245, 247, 250, 0.16);
+  
+  /* Type */
+  --font-display: "Teko", sans-serif;
+  --font-body: "Inter", sans-serif;
+  
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  
+  /* Radius / motion */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --transition: 160ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------
+   Focus visibility — kept consistent everywhere, never removed
+   ------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition), opacity var(--transition);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #1a1200;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   Form fields
+   ------------------------------------------------------------ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.field input {
+  background: var(--color-bg-elevated-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 11px 14px;
+  transition: border-color var(--transition);
+}
+
+.field input:focus {
+  border-color: var(--color-accent);
+}
+
+.field-hint {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.field-error {
+  font-size: 13px;
+  color: var(--color-danger);
+}
+
+/* ------------------------------------------------------------
+   Cards / surfaces
+   ------------------------------------------------------------ */
+.card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+}
+
+/* ------------------------------------------------------------
+   Alerts
+   ------------------------------------------------------------ */
+.alert {
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.alert-danger {
+  background: rgba(255, 70, 85, 0.12);
+  border: 1px solid rgba(255, 70, 85, 0.3);
+  color: #ffb3ba;
+}
+
+/* ------------------------------------------------------------
+   Reduced motion
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

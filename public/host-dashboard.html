@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Host dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <span class="dashboard-brand">Bracketed</span>
+    <div class="dashboard-user">
+      <span class="dashboard-username" id="username-display"></span>
+      <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">Your tournaments</h1>
+        <p class="dashboard-subtitle">Create a tournament, share the join code, and let the table run itself.</p>
+      </div>
+      <button type="button" class="btn btn-primary" id="open-create-modal">Create tournament</button>
+    </div>
+
+    <!-- Empty state -->
+    <div class="card empty-state" id="empty-state" hidden>
+      <h2 class="empty-state-title">No tournaments yet</h2>
+      <p class="empty-state-desc">
+        Create your first tournament to get a join code you can share with players.
+      </p>
+      <button type="button" class="btn btn-primary" id="empty-state-create-btn">Create tournament</button>
+    </div>
+
+    <!-- Tournament grid -->
+    <div class="tournament-grid" id="tournament-grid" hidden></div>
+  </main>
+
+  <!-- Create Tournament modal -->
+  <div class="modal-overlay" id="create-modal-overlay" hidden>
+    <div class="card modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Create tournament</h2>
+        <button type="button" class="modal-close" id="close-create-modal" aria-label="Close">&times;</button>
+      </div>
+
+      <form id="create-tournament-form" novalidate>
+        <div id="create-alert" class="alert alert-danger" hidden></div>
+
+        <div class="field">
+          <label for="tournament-name">Tournament name</label>
+          <input id="tournament-name" name="name" type="text" maxlength="150" required />
+          <p class="field-error" id="name-error" hidden></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="game-type">Game</label>
+            <select id="game-type" name="game_type" required>
+              <option value="">Select a game</option>
+              <option value="FC Mobile">FC Mobile</option>
+              <option value="eFootball">eFootball</option>
+            </select>
+            <p class="field-error" id="game_type-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="format">Format</label>
+            <select id="format" name="format" required>
+              <option value="">Select a format</option>
+              <option value="round_robin">Round-robin (league)</option>
+              <option value="knockout">Knockout (bracket)</option>
+            </select>
+            <p class="field-error" id="format-error" hidden></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="description">Description (optional)</label>
+          <textarea id="description" name="description" maxlength="1000"></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="max-participants">Max participants</label>
+            <input id="max-participants" name="max_participants" type="number" min="2" />
+            <p class="field-hint" id="max-participants-hint">Required for knockout — must be a power of 2 (4, 8, 16...).</p>
+            <p class="field-error" id="max_participants-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="start-date">Start date</label>
+            <input id="start-date" name="start_date" type="date" />
+            <p class="field-hint">Fixtures generate automatically on this date.</p>
+            <p class="field-error" id="start_date-error" hidden></p>
+          </div>
+        </div>
+
+        <div class="field" id="legs-field">
+          <label for="legs">Legs (round-robin)</label>
+          <select id="legs" name="legs">
+            <option value="1">Single (play once)</option>
+            <option value="2">Double (home &amp; away)</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="no-show-policy">No-show policy</label>
+            <select id="no-show-policy" name="no_show_policy">
+              <option value="manual">Manual — I'll resolve it myself</option>
+              <option value="walkover">Walkover — award the win automatically</option>
+              <option value="void">Void — no points either side</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="grace-period">Grace period (hours)</label>
+            <input id="grace-period" name="grace_period_hours" type="number" min="0" value="24" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="max-missed">Max missed matches before disqualification (optional)</label>
+          <input id="max-missed" name="max_missed_matches" type="number" min="0" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create tournament</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/host-dashboard.js"></script>
+</body>
+</html>

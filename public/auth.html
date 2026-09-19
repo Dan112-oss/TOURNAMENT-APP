@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in or create an account</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+</head>
+<body>
+  <div class="auth-page">
+    <!-- Hero panel: the one bold element, per the design plan -->
+    <aside class="auth-hero">
+      <svg class="auth-hero-bracket" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M20 60 L120 60 L120 140 L220 140" />
+        <path d="M20 180 L120 180 L120 140" />
+        <path d="M220 140 L320 140 L320 260" />
+      </svg>
+
+      <p class="auth-hero-brand">Bracketed</p>
+
+      <div class="auth-hero-content">
+        <h1 class="auth-hero-title">Run tournaments your squad actually shows up for</h1>
+        <p class="auth-hero-sub">
+          Host FC Mobile and eFootball tournaments, track every match result, and let the table update itself.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Form panel -->
+    <main class="auth-panel">
+      <div class="auth-card">
+        <div class="tabs" role="tablist">
+          <button type="button" class="tab-btn active" data-tab="login" role="tab" aria-selected="true">Log in</button>
+          <button type="button" class="tab-btn" data-tab="register" role="tab" aria-selected="false">Create account</button>
+        </div>
+
+        <!-- Login form -->
+        <form id="login-form" class="auth-form" novalidate>
+          <div id="login-alert" class="alert alert-danger" hidden></div>
+
+          <div class="field">
+            <label for="login-email">Email</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="login-password">Password</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </form>
+
+        <!-- Register form -->
+        <form id="register-form" class="auth-form" novalidate hidden>
+          <div id="register-alert" class="alert alert-danger" hidden></div>
+
+          <div class="field">
+            <label for="register-username">Username</label>
+            <input id="register-username" name="username" type="text" autocomplete="username" required minlength="3" maxlength="50" />
+            <p class="field-error" id="username-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="register-email">Email</label>
+            <input id="register-email" name="email" type="email" autocomplete="email" required />
+            <p class="field-error" id="email-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="register-password">Password</label>
+            <input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="8" />
+            <p class="field-hint">At least 8 characters, with a number and a symbol.</p>
+            <p class="field-error" id="password-error" hidden></p>
+          </div>
+
+          <fieldset class="role-select">
+            <legend>I'm signing up as</legend>
+            <div class="role-options">
+              <label class="role-option">
+                <input type="radio" name="role" value="host" required />
+                Host
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="player" />
+                Player
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="both" />
+                Both
+              </label>
+            </div>
+            <p class="field-error" id="role-error" hidden></p>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary btn-block">Create account</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
