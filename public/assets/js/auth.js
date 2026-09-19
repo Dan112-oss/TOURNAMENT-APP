@@ -189,8 +189,17 @@ function initRegisterForm() {
   });
 }
 
+function applyTabFromUrl() {
+  const tab = new URLSearchParams(window.location.search).get('tab');
+  if (tab !== 'register') return; // login is already the default active tab
+
+  const registerTabBtn = document.querySelector('.tab-btn[data-tab="register"]');
+  if (registerTabBtn) registerTabBtn.click();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initLoginForm();
   initRegisterForm();
+  applyTabFromUrl();
 });
