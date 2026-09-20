@@ -52,15 +52,8 @@ async function postJSON(url, body) {
     credentials: 'same-origin',
     body: JSON.stringify(body),
   });
-  const rawText = await response.text();
-  try {
-    const data = JSON.parse(rawText);
-    return { status: response.status, data };
-  } catch (err) {
-    // TEMP DIAGNOSTIC: surface the actual response body instead of
-    // swallowing it as a generic parse failure.
-    throw new Error(`Non-JSON response (status ${response.status}): ${rawText.slice(0, 500)}`);
-  }
+  const data = await response.json();
+  return { status: response.status, data };
 }
 
 // ------------------------------------------------------------
@@ -254,7 +247,7 @@ function initModal() {
       closeModal();
       await loadTournaments();
     } catch (err) {
-      setAlert(alertEl, err.message || 'Could not reach the server. Check your connection and try again.');
+      setAlert(alertEl, 'Could not reach the server. Check your connection and try again.');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Create tournament';

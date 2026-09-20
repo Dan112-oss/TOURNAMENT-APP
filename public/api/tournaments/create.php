@@ -21,7 +21,7 @@ declare(strict_types=1);
 header('Content-Type: application/json');
 session_start();
 
-require_once __DIR__ . '/../../core/Database.php';
+require_once __DIR__ . '/../../../core/Database.php';
 
 const JOIN_CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // ambiguous chars (0/O, 1/I/L) removed
 const JOIN_CODE_LENGTH = 6;
