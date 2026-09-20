@@ -3,8 +3,8 @@ FROM php:8.2-apache
 # Enable Apache rewrite engine for clean routing
 RUN a2enmod rewrite
 
-# Install PDO MySQL extension (or pdo_pgsql if using PostgreSQL)
-RUN docker-php-ext-install pdo pdo_mysql
+# Install PDO MySQL and mbstring extensions
+RUN docker-php-ext-install pdo pdo_mysql mbstring
 
 # Set Apache root directory to /public where index.php and assets live
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
