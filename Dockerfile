@@ -3,6 +3,9 @@ FROM php:8.2-apache
 # Enable Apache rewrite engine for clean routing
 RUN a2enmod rewrite
 
+# Install system dependency required to compile mbstring
+RUN apt-get update && apt-get install -y libonig-dev && rm -rf /var/lib/apt/lists/*
+
 # Install PDO MySQL and mbstring extensions
 RUN docker-php-ext-install pdo pdo_mysql mbstring
 
