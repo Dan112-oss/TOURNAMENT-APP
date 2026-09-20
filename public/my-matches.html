@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My matches</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Teko:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/my-matches.css" />
+</head>
+<body>
+  <header class="dashboard-topbar">
+    <a class="dashboard-brand" href="player-dashboard.html" style="text-decoration:none;">Bracketed</a>
+    <div class="dashboard-user">
+      <span class="dashboard-username" id="username-display"></span>
+      <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <a href="player-dashboard.html" style="display:inline-block; margin-bottom: var(--space-4); color: var(--color-text-muted); font-size: 14px;">&larr; Back to dashboard</a>
+
+    <div class="dashboard-header">
+      <div>
+        <h1 class="dashboard-title">My matches</h1>
+        <p class="dashboard-subtitle">Across every tournament you're playing in.</p>
+      </div>
+    </div>
+
+    <section class="matches-section">
+      <h2 class="matches-section-title">Today</h2>
+      <p class="matches-section-sub">Matches due today across all your tournaments.</p>
+      <div id="today-matches"></div>
+    </section>
+
+    <section class="matches-section">
+      <h2 class="matches-section-title">Needs your attention</h2>
+      <p class="matches-section-sub">Submit a result, or confirm/dispute one your opponent submitted.</p>
+      <div id="action-matches"></div>
+    </section>
+
+    <section class="matches-section">
+      <h2 class="matches-section-title">All other matches</h2>
+      <div id="other-matches"></div>
+    </section>
+  </main>
+
+  <!-- Match card template -->
+  <template id="match-card-template">
+    <div class="card match-card">
+      <div class="match-card-top">
+        <div>
+          <div class="match-card-tournament"></div>
+          <div class="match-card-players">
+            <span class="me-name"></span><span class="vs">vs</span><span class="opponent-name"></span>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <span class="status-badge match-status-badge"></span>
+          <div class="match-card-deadline"></div>
+        </div>
+      </div>
+      <div class="match-card-body"></div>
+    </div>
+  </template>
+
+  <script src="assets/js/my-matches.js"></script>
+</body>
+</html>

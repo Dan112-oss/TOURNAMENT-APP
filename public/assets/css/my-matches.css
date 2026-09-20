@@ -1,0 +1,111 @@
+/* ============================================================
+   My Matches page
+   ============================================================ */
+
+.matches-section {
+  margin-bottom: var(--space-7);
+}
+
+.matches-section-title {
+  font-size: 22px;
+  margin-bottom: var(--space-2);
+}
+
+.matches-section-sub {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: var(--space-4);
+}
+
+.match-card {
+  margin-bottom: var(--space-3);
+}
+
+.match-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.match-card-tournament {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.match-card-players {
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.match-card-players .vs {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  font-family: var(--font-body);
+  margin: 0 var(--space-2);
+}
+
+.match-card-deadline {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.match-card-body {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+/* Submit form */
+.submit-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.submit-row input[type='number'] {
+  width: 64px;
+  text-align: center;
+}
+
+.file-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.file-input-wrap input[type='file'] {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+/* Waiting / read-only states */
+.match-status-note {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.match-status-note strong {
+  color: var(--color-text);
+}
+
+.pending-score-display {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin-bottom: var(--space-3);
+}
+
+.confirm-dispute-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.empty-matches {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
