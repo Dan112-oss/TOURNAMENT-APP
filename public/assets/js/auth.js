@@ -139,7 +139,7 @@ function initRegisterForm() {
   const form = document.getElementById('register-form');
   const alertEl = document.getElementById('register-alert');
   const submitBtn = form.querySelector('button[type="submit"]');
-  const fieldErrorIds = ['username-error', 'email-error', 'password-error', 'role-error'];
+  const fieldErrorIds = ['username-error', 'game_username-error', 'email-error', 'password-error', 'role-error'];
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -147,6 +147,7 @@ function initRegisterForm() {
     clearFieldErrors(fieldErrorIds);
 
     const username = form.username.value.trim();
+    const gameUsername = form.game_username.value.trim();
     const email = form.email.value.trim();
     const password = form.password.value;
     const roleInput = form.querySelector('input[name="role"]:checked');
@@ -162,6 +163,7 @@ function initRegisterForm() {
     try {
       const { status, data } = await postJSON('/api/auth/register.php', {
         username,
+        game_username: gameUsername,
         email,
         password,
         role,
@@ -169,6 +171,7 @@ function initRegisterForm() {
 
       if (status === 422 && data.errors) {
         if (data.errors.username) setFieldError('username-error', data.errors.username);
+        if (data.errors.game_username) setFieldError('game_username-error', data.errors.game_username);
         if (data.errors.email) setFieldError('email-error', data.errors.email);
         if (data.errors.password) setFieldError('password-error', data.errors.password);
         if (data.errors.role) setFieldError('role-error', data.errors.role);

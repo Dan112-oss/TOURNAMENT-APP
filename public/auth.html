@@ -68,6 +68,13 @@
           </div>
 
           <div class="field">
+            <label for="register-game-username">In-game username (FC Mobile / eFootball)</label>
+            <input id="register-game-username" name="game_username" type="text" required minlength="2" maxlength="50" />
+            <p class="field-hint">Use your exact username as it appears in-game — this is how opponents and hosts identify you.</p>
+            <p class="field-error" id="game_username-error" hidden></p>
+          </div>
+
+          <div class="field">
             <label for="register-email">Email</label>
             <input id="register-email" name="email" type="email" autocomplete="email" required />
             <p class="field-error" id="email-error" hidden></p>

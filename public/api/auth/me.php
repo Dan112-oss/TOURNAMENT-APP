@@ -33,7 +33,7 @@ if (empty($_SESSION['user_id'])) {
 try {
     $db = Database::getConnection();
 
-    $stmt = $db->prepare('SELECT id, username, email, role, is_active FROM users WHERE id = :id');
+    $stmt = $db->prepare('SELECT id, username, game_username, email, role, is_active FROM users WHERE id = :id');
     $stmt->execute([':id' => (int) $_SESSION['user_id']]);
     $user = $stmt->fetch();
 
@@ -52,6 +52,7 @@ try {
         'user' => [
             'id' => (int) $user['id'],
             'username' => $user['username'],
+            'game_username' => $user['game_username'],
             'email' => $user['email'],
             'role' => $user['role'],
         ],

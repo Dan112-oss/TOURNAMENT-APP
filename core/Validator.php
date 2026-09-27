@@ -25,6 +25,16 @@ class Validator
     }
 
     /**
+     * In-game username (FC Mobile / eFootball): more permissive than
+     * the login username, since in-game names often include spaces,
+     * accents, dots, or hyphens. 2-50 chars.
+     */
+    public static function isValidGameUsername(string $gameUsername): bool
+    {
+        return (bool) preg_match('/^[\p{L}\p{N} _\-\.]{2,50}$/u', $gameUsername);
+    }
+
+    /**
      * Password: at least 8 characters, at least one digit, and at
      * least one symbol (non-alphanumeric character).
      */

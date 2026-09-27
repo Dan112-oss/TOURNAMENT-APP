@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $input = json_decode(file_get_contents('php://input'), true);
 
 $username = isset($input['username']) ? trim((string) $input['username']) : '';
+$gameUsername = isset($input['game_username']) ? trim((string) $input['game_username']) : '';
 $email = isset($input['email']) ? trim((string) $input['email']) : '';
 $password = isset($input['password']) ? (string) $input['password'] : '';
 $role = isset($input['role']) ? (string) $input['role'] : '';
@@ -38,6 +39,10 @@ $errors = [];
 
 if (!Validator::isValidUsername($username)) {
     $errors['username'] = 'Username must be 3-50 characters, letters/numbers/underscores only.';
+}
+
+if (!Validator::isValidGameUsername($gameUsername)) {
+    $errors['game_username'] = 'Enter your exact in-game username (2-50 characters).';
 }
 
 if (!Validator::isValidEmail($email)) {
@@ -72,11 +77,12 @@ try {
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     $insert = $db->prepare(
-        "INSERT INTO users (username, email, password_hash, role)
-         VALUES (:username, :email, :password_hash, :role)"
+        "INSERT INTO users (username, game_username, email, password_hash, role)
+         VALUES (:username, :game_username, :email, :password_hash, :role)"
     );
     $insert->execute([
         ':username' => $username,
+        ':game_username' => $gameUsername,
         ':email' => $email,
         ':password_hash' => $passwordHash,
         ':role' => $role,
@@ -95,6 +101,7 @@ try {
         'user' => [
             'id' => $userId,
             'username' => $username,
+            'game_username' => $gameUsername,
             'email' => $email,
             'role' => $role,
         ],

@@ -222,6 +222,46 @@ function buildSubmitBody(match, onDone) {
   fileInput.accept = 'image/jpeg,image/png,image/webp';
   fileWrap.appendChild(fileInput);
 
+  const detectNote = document.createElement('p');
+  detectNote.className = 'field-hint';
+  detectNote.hidden = true;
+  fileWrap.appendChild(detectNote);
+
+  fileInput.addEventListener('change', async () => {
+    if (!fileInput.files || fileInput.files.length === 0) return;
+
+    detectNote.hidden = false;
+    detectNote.textContent = 'Scanning screenshot for a scoreline…';
+
+    const formData = new FormData();
+    formData.append('image', fileInput.files[0]);
+
+    try {
+      const { data } = await postFormData('/api/results/detect-score.php', formData);
+
+      if (data.detected) {
+        score1.value = String(data.detected.score1);
+        score2.value = String(data.detected.score2);
+        detectNote.textContent = `Detected ${data.detected.score1}\u2013${data.detected.score2} \u2014 double-check the order (you first) and edit if it's wrong.`;
+      } else {
+        detectNote.textContent = "Couldn't auto-detect a score \u2014 enter it manually below.";
+      }
+    } catch (err) {
+      detectNote.textContent = "Couldn't auto-detect a score \u2014 enter it manually below.";
+    }
+  });
+
+  const swapBtn = document.createElement('button');
+  swapBtn.type = 'button';
+  swapBtn.className = 'btn btn-ghost btn-sm';
+  swapBtn.textContent = 'Swap scores';
+  swapBtn.style.marginBottom = 'var(--space-3)';
+  swapBtn.addEventListener('click', () => {
+    const temp = score1.value;
+    score1.value = score2.value;
+    score2.value = temp;
+  });
+
   const errorEl = document.createElement('p');
   errorEl.className = 'field-error';
   errorEl.hidden = true;
@@ -278,6 +318,7 @@ function buildSubmitBody(match, onDone) {
 
   wrap.appendChild(submitRow);
   wrap.appendChild(fileWrap);
+  wrap.appendChild(swapBtn);
   wrap.appendChild(errorEl);
   wrap.appendChild(submitBtn);
 
